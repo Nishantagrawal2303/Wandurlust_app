@@ -37,7 +37,6 @@ router.get("/", wrapAsync(async (req, res) => {
       req.flash("error", "listing you requested does not exist!");
       res.redirect("/listings");
     }
-    console.log(listing);
     res.render("listings/show.ejs", { listing });
   }));
 
@@ -75,7 +74,6 @@ router.post("/",isLoggedIn, validateListing, wrapAsync( async (req, res , next) 
   router.delete("/:id",isLoggedIn, wrapAsync(async (req, res) => {
     let { id } = req.params;
     let deletedListing = await Listing.findByIdAndDelete(id);
-    console.log(deletedListing);
     req.flash("success", "listing deleted");
     res.redirect("/listings");
   }));
